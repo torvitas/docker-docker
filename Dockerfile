@@ -1,3 +1,6 @@
 FROM docker:latest
-RUN curl -L https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-RUN chmod +x /usr/local/bin/docker-compose
+
+ENV DOCKER_COMPOSE_VERSION 1.7.1
+RUN apk --update add py-pip py-yaml &&\
+    pip install -U docker-compose==${DOCKER_COMPOSE_VERSION} &&\
+    rm -rf `find / -regex '.*\.py[co]' -or -name apk`
