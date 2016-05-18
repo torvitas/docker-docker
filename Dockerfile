@@ -1,2 +1,6 @@
-FROM docker:dind
-RUN sed -i "s/storage-driver=vfs/storage-driver=aufs/g" /usr/local/bin/dockerd-entrypoint.sh
+FROM gitlab/dind
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y make && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
