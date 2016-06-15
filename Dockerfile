@@ -7,6 +7,7 @@ RUN apk --update add \
   make \
   py-pip \
   git \
+  sudo \
   openssh-client \
   && pip install --upgrade docker-compose pip \
   && rm -rf /var/cache/apk/* \
