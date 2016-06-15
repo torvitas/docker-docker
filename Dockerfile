@@ -16,4 +16,4 @@ COPY dockerd-entrypoint.sh /usr/local/bin/
 
 VOLUME /var/lib/docker
 ENTRYPOINT ["dockerd-entrypoint.sh"]
-CMD []
+CMD ['sh']
