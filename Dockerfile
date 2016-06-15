@@ -1,6 +1,19 @@
-FROM gitlab/dind
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y make && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+FROM docker:dind
+MAINTAINER docker@saschaschmidt.net
+
+# Install Docker and dependencies
+RUN apk --update add \
+  bash \
+  make \
+  py-pip \
+  git \
+  openssh-client \
+  && pip install --upgrade docker-compose pip \
+  && rm -rf /var/cache/apk/* \
+  && rm -rf /root/.cache/pip/*
+
+COPY dockerd-entrypoint.sh /usr/local/bin/
+
+VOLUME /var/lib/docker
+ENTRYPOINT ["dockerd-entrypoint.sh"]
+CMD []
