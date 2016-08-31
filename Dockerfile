@@ -18,5 +18,6 @@ RUN curl -sSL https://get.docker.com/ | sh
 VOLUME /var/lib/docker
 ENTRYPOINT ["dockerd-entrypoint.sh"]
 CMD '/bin/bash'
+RUN mkdir -p /var/log/docker
 
 COPY src/ /usr/local/
