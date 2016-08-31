@@ -1,20 +1,20 @@
-FROM docker:dind
+FROM ubuntu:16.04
 MAINTAINER docker@saschaschmidt.net
 
 # Install Docker and dependencies
-RUN apk --update add \
-  bash \
+RUN apt-get update -qq; apt-get install -qqy \
+  curl \
   make \
-  py-pip \
+  python-pip \
   git \
   sudo \
-  openssh-client \
+  && apt-get clean \
   && pip install --upgrade docker-compose pip \
-  && rm -rf /var/cache/apk/* \
   && rm -rf /root/.cache/pip/*
 
+RUN curl -sSL https://get.docker.com/ | sh
 COPY dockerd-entrypoint.sh /usr/local/bin/
 
 VOLUME /var/lib/docker
 ENTRYPOINT ["dockerd-entrypoint.sh"]
-CMD ['sh']
+CMD '/bin/sh'
