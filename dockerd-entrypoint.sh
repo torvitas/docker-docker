@@ -2,6 +2,6 @@
 
 docker daemon \
     --host=unix:///var/run/docker.sock \
-    --storage-driver=devicemapper &
+    --storage-driver=aufs &
 
 exec "$@"
