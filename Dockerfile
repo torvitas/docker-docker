@@ -7,14 +7,16 @@ RUN apt-get update -qq; apt-get install -qqy \
   make \
   python-pip \
   git \
+  supervisor \
   sudo \
   && apt-get clean \
   && pip install --upgrade docker-compose pip \
   && rm -rf /root/.cache/pip/*
 
 RUN curl -sSL https://get.docker.com/ | sh
-COPY dockerd-entrypoint.sh /usr/local/bin/
 
 VOLUME /var/lib/docker
 ENTRYPOINT ["dockerd-entrypoint.sh"]
 CMD '/bin/bash'
+
+COPY src/ /usr/local/
