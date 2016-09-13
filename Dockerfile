@@ -1,17 +1,17 @@
-FROM ubuntu:16.04
+FROM centos:7
 MAINTAINER docker@saschaschmidt.net
 
 # Install Docker and dependencies
-RUN apt-get update -qq; apt-get install -qqy \
+RUN yum install epel-release -y && yum install -y \
   curl \
   make \
   python-pip \
   git \
   supervisor \
   sudo \
-  && apt-get clean \
+  && yum clean all \
   && pip install --upgrade docker-compose pip \
-  && rm -rf /root/.cache/pip/*
+  && rm -rf /root/.cache/pip/
 
 RUN curl -sSL https://get.docker.com/ | sh
 
