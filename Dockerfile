@@ -5,15 +5,15 @@ MAINTAINER docker@saschaschmidt.net
 RUN yum install epel-release -y && yum install -y \
   curl \
   make \
+  iptables \
   python-pip \
   git \
   supervisor \
   sudo \
+  docker \
   && yum clean all \
   && pip install --upgrade docker-compose pip \
   && rm -rf /root/.cache/pip/
-
-RUN curl -sSL https://get.docker.com/ | sh
 
 VOLUME /var/lib/docker
 ENTRYPOINT ["dockerd-entrypoint.sh"]
