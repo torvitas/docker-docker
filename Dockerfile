@@ -5,6 +5,7 @@ MAINTAINER docker@saschaschmidt.net
 RUN apk add -U \
     curl \
     bash \
+    openssh-client \
     make \
     git \
     supervisor
